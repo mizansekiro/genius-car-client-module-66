@@ -8,6 +8,9 @@ import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
 
 import AddNewService from "../../Pages/AddNewService/AddNewService";
+import Orders from "../../Pages/Orders/Orders";
+import Carts from "../../Pages/Cart/Carts";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
 	{
@@ -17,15 +20,21 @@ const router = createBrowserRouter([
 			{
 				path: "/",
 				element: <Home></Home>,
-			},
-
-			{
-				path: "/",
-				element: <Home></Home>,
+				loader: () => fetch(`http://localhost:5000/services`),
 			},
 			{
-				path: "chackout",
+				path: "checkout",
 				element: <CheckOut></CheckOut>,
+			},
+			{
+				path: "checkout/:id",
+				element: (
+					<PrivateRoute>
+						<CheckOut></CheckOut>
+					</PrivateRoute>
+				),
+				loader: ({ params }) =>
+					fetch(`http://localhost:5000/services/${params.id}`),
 			},
 			{
 				path: "addNewService",
@@ -44,6 +53,18 @@ const router = createBrowserRouter([
 			{
 				path: "signup",
 				element: <SignUp></SignUp>,
+			},
+			{
+				path: "orders",
+				element: (
+					<PrivateRoute>
+						<Orders></Orders>
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "carts",
+				element: <Carts></Carts>,
 			},
 			{
 				path: "*",

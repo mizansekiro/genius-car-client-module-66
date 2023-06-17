@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import loginImage from "../../assets/images/login/login.svg";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
+import googleLogo from "../../assets/icons/google.svg";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const SignUp = () => {
@@ -113,20 +113,15 @@ const SignUp = () => {
 						</form>
 						<div className="text-center text-[#444444] ">
 							<div className="mb-3">
-								<p>Or Sign Up With</p>
+								<div className="divider">OR</div>
 							</div>
-							<div className="grid grid-flow-col gap-4 justify-center items-center my-3">
-								<button className="btn btn-circle text-2xl hover:bg-[#FF3811] hover:text-white">
-									<FaFacebookF />
-								</button>
-								<Link className="btn btn-circle text-2xl hover:bg-[#FF3811] hover:text-white">
-									<FaLinkedinIn />
-								</Link>
+							<div className="mb-2">
 								<button
 									onClick={handleGoogleSignUpSignIn}
-									className="btn btn-circle text-2xl hover:bg-[#FF3811] hover:text-white"
+									className="btn btn-outline border-[#FF3811] hover:bg-white  hover:text-[#FF3811] hover:border-accent"
 								>
-									<FaGoogle />
+									<img src={googleLogo} alt="" width={30} />
+									<p>Sign in with Google</p>
 								</button>
 							</div>
 							<div>

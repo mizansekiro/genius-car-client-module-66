@@ -5,7 +5,7 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import { FaUserSecret } from "react-icons/fa";
 import { Toaster, toast } from "react-hot-toast";
 
-const Header = () => {
+const AdminHeader = () => {
 	const navigate = useNavigate();
 	const { user, logOutUser } = useContext(AuthContext);
 	const handleLogout = () => {
@@ -18,48 +18,30 @@ const Header = () => {
 				// An error happened.
 			});
 	};
-
+	//Order            Order Review            Manage Inventory            Login
 	const menuItem = (
 		<>
 			<li className="font-semibold">
 				<Link to="/">Home</Link>
 			</li>
+			<li className="font-semibold">
+				<Link to="/orders">Orders</Link>
+			</li>
+			<li className="font-semibold">
+				<Link to="/">Order Review</Link>
+			</li>
+			<li className="font-semibold">
+				<Link to="/">Manage Inventory</Link>
+			</li>
 
 			{user?.uid ? (
-				<>
-					<li className="font-semibold">
-						<Link to="/carts">Carts</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/orders">Orders</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/">Order Review</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/">Manage Inventory</Link>
-					</li>
-
-					<li className="font-semibold">
-						<button onClick={handleLogout} to="/login">
-							Logout
-						</button>
-					</li>
-				</>
+				<li className="font-semibold">
+					<button onClick={handleLogout} to="/login">
+						Logout
+					</button>
+				</li>
 			) : (
 				<>
-					<li className="font-semibold">
-						<Link to="/">About</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/">Services</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/">Blog</Link>
-					</li>
-					<li className="font-semibold">
-						<Link to="/">Contact</Link>
-					</li>
 					<li className="font-semibold">
 						<Link to="/login">Login</Link>
 					</li>
@@ -110,46 +92,6 @@ const Header = () => {
 				<ul className="menu menu-horizontal px-1">{menuItem}</ul>
 			</div>
 			<div className="navbar-end">
-				<button tabIndex={0} className="btn btn-ghost btn-circle">
-					<div className="indicator">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-							/>
-						</svg>
-					</div>
-				</button>
-				<button className="btn btn-ghost btn-circle">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-5 w-5"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-						/>
-					</svg>
-				</button>
-				<div>
-					<Link to="/" className="btn mx-3">
-						Appointment
-					</Link>
-				</div>
-
 				{user?.uid ? (
 					<>
 						<div className="dropdown dropdown-end">
@@ -173,14 +115,11 @@ const Header = () => {
 								<li>
 									<a className="justify-between">Profile</a>
 								</li>
-								<li className="font-semibold"></li>
 								<li>
-									<Link to="/addNewService">Add new Service</Link>
+									<a>Settings</a>
 								</li>
 								<li>
-									<Link onClick={handleLogout} to="/login">
-										Logout
-									</Link>
+									<a>Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -197,4 +136,4 @@ const Header = () => {
 	);
 };
 
-export default Header;
+export default AdminHeader;

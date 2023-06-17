@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaRegTrashAlt, FaTimesCircle } from "react-icons/fa";
 import cartImage from "../../../../assets/images/products/1.png";
+import { AuthContext } from "../../../../Context/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
-const OrderForm = ({ formData }) => {
+const OrderForm = ({ formData, handleInputForm }) => {
+	const { _id, image, title, price } = useLoaderData();
+	const { user } = useContext(AuthContext);
 	const [color, setColor] = useState(
 		"select btn-success text-white w-full max-w-xs"
 	);
@@ -18,6 +22,7 @@ const OrderForm = ({ formData }) => {
 		}
 	};
 	const {
+		purpose,
 		leftInputTop,
 		rightInputTop,
 		leftInputBottom,
@@ -25,15 +30,25 @@ const OrderForm = ({ formData }) => {
 		textarea,
 		btnText,
 	} = formData;
+
+	if (purpose === "addNewService") {
+	}
+
+	const handleInputFormw = (event) => {
+		event.preventDefault();
+		console.log("clock");
+	};
+
 	return (
 		<div className=" border rounded-lg mx-auto p-20 mb-32 bg-[#F3F3F3]">
-			<form>
+			<form onSubmit={() => handleInputForm(event)}>
 				<div className="space-y-12">
 					<div className="pb-6">
 						<div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 							<div className="sm:col-span-3">
 								<div className="mt-2">
 									<input
+										name="leftInputTop"
 										type="text"
 										placeholder={leftInputTop}
 										className="input input-bordered w-full "
@@ -44,6 +59,7 @@ const OrderForm = ({ formData }) => {
 							<div className="sm:col-span-3">
 								<div className="mt-2">
 									<input
+										name="rightInputTop"
 										type="text"
 										placeholder={rightInputTop}
 										className="input input-bordered w-full "
@@ -53,6 +69,7 @@ const OrderForm = ({ formData }) => {
 							<div className="sm:col-span-3">
 								<div className="mt-2">
 									<input
+										name="leftInputBottom"
 										type="text"
 										placeholder={leftInputBottom}
 										className="input input-bordered w-full "
@@ -63,9 +80,24 @@ const OrderForm = ({ formData }) => {
 							<div className="sm:col-span-3">
 								<div className="mt-2">
 									<input
+										name="rightInputBottom"
 										type="text"
 										placeholder={rightInputBottom}
 										className="input input-bordered w-full "
+										defaultValue={
+											purpose === "addNewService"
+												? ""
+												: user
+												? user?.email
+												: "unregistered user"
+										}
+										readOnly={
+											purpose === "addNewService"
+												? false
+												: user?.email
+												? true
+												: false
+										}
 									/>
 								</div>
 							</div>
@@ -73,6 +105,7 @@ const OrderForm = ({ formData }) => {
 							<div className="col-span-full">
 								<div className="mt-2">
 									<textarea
+										name="textarea"
 										className="textarea textarea-bordered w-full h-[250px]"
 										placeholder={textarea}
 									></textarea>

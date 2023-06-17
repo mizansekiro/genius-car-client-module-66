@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import { useLoaderData } from "react-router-dom";
 
 const Service = () => {
-	const [services, setServices] = useState([]);
-	useEffect(() => {
-		fetch("services.json")
-			.then((res) => res.json())
-			.then((data) => setServices(data));
-	}, []);
+	const services = useLoaderData();
+	// const [services, setServices] = useState([]);
+	// useEffect(() => {
+	// 	fetch("services.json")
+	// 		.then((res) => res.json())
+	// 		.then((data) => setServices(data));
+	// }, []);
 	return (
 		<div className="mb-32">
 			<div className="text-center w-1/2 mx-auto mb-12">

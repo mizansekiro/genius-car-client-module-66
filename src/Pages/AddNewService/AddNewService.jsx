@@ -13,6 +13,7 @@ const AddNewService = () => {
 	};
 	const serviceData = {
 		id: "02",
+		purpose: "addNewService",
 		leftInputTop: "Service Name",
 		rightInputTop: "Service Price",
 		leftInputBottom: "Your Phone",
